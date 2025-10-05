@@ -1,0 +1,17 @@
+[project]
+name = "dataproc-workshop"
+version = "0.1.0"
+description = "Google Cloud Dataproc & PySpark Distributed Data Processing Workshop"
+readme = "README.md"
+requires-python = ">=3.11,<3.13"
+dependencies = [
+    "pyspark>=3.5.0",
+    "python-dotenv>=1.0.1",
+]
+
+[dependency-groups]
+dev = [
+    "pytest>=8.0.0",
+    "ruff>=0.6.0",
+    "ipykernel>=6.29.0",
+]
