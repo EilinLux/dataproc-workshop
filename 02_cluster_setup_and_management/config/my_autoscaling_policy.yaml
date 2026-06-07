@@ -1,0 +1,22 @@
+# ==============================================================================
+# Chapter 02 — Dataproc Autoscaling Policy Definition (my_autoscaling_policy.yaml)
+# Reference Notebook: ../02_cluster_setup_and_management.ipynb
+#
+# Imported via:
+#   gcloud dataproc autoscaling-policies import my-workshop-autoscaling-policy-yaml \
+#     --source=02_cluster_setup_and_management/config/my_autoscaling_policy.yaml \
+#     --region="${GCP_REGION}"
+# ==============================================================================
+id: my-workshop-autoscaling-policy-yaml
+basicAlgorithm:
+  cooldownPeriod: 120s                     # Wait 2 minutes between scaling events to prevent flapping
+  yarnConfig:
+    gracefulDecommissionTimeout: 60s       # Wait up to 60s for active YARN containers to finish before node removal
+    scaleUpFactor: 1.0                     # Aggressive scale-up (allocate 100% of pending YARN memory demand)
+    scaleDownFactor: 0.5                   # Conservative scale-down (remove 50% of idle worker capacity at a time)
+workerConfig:
+  minInstances: 2                          # Minimum primary (on-demand) worker nodes
+  maxInstances: 10                         # Maximum primary (on-demand) worker nodes
+secondaryWorkerConfig:
+  minInstances: 0                          # Allow 0 secondary (Spot/preemptible) workers when idle
+  maxInstances: 10                         # Burst up to 10 secondary workers under heavy YARN shuffle load
