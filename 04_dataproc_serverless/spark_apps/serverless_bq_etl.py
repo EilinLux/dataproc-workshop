@@ -68,7 +68,9 @@ def main() -> None:
         print(f"Reading source data from BigQuery table: {args.input_table}")
         df = spark.read.format("bigquery").option("table", args.input_table).load()
 
-        # 2. Filter by processing_date and compute total_sales per product_id
+        # 2. Filter by processing_date, compute total_sales per product_id, and
+        #    append `processed_timestamp` (matching the `filtered_sales` schema
+        #    created in Chapter 03 where `processed_timestamp` is REQUIRED).
         print(f"Filtering and aggregating transactions for date: {args.processing_date}")
         processed_df = (
             df.filter(
@@ -77,6 +79,7 @@ def main() -> None:
             .groupBy("product_id")
             .agg(F.sum("amount").alias("total_sales"))
             .withColumn("processing_date", F.lit(args.processing_date).cast(DateType()))
+            .withColumn("processed_timestamp", F.current_timestamp())
         )
 
         # 3. Write aggregated DataFrame back to BigQuery
