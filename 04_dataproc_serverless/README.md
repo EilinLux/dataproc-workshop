@@ -2,7 +2,7 @@
 
 ## Overview
 
-In Chapters 02 and 03, you provisioned and managed a Compute Engine Dataproc cluster before submitting your PySpark job. With **Dataproc Serverless for Spark**, you no longer provision, tune, or tear down clusters—you simply submit your PySpark batch script (`gcloud dataproc batches submit pyspark`), and Google Cloud dynamically allocates and autoscales the executors for the exact duration of the job.
+In Chapters 02 and 03, you provisioned and managed a Compute Engine Dataproc cluster before submitting your PySpark job. With **Dataproc Serverless for Spark** (now surfaced in the Google Cloud Console as **Managed Apache Spark** / **Google Cloud Serverless for Apache Spark**), you no longer provision, tune, or tear down clusters—you simply submit your PySpark batch script (`gcloud dataproc batches submit pyspark`), and Google Cloud dynamically allocates and autoscales the executors for the exact duration of the job.
 
 ### What We Are Going to Do
 1. **Examine the Serverless PySpark ETL Script ([`spark_apps/serverless_bq_etl.py`](./spark_apps/serverless_bq_etl.py))**:
